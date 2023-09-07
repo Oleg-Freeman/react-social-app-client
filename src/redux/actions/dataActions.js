@@ -16,13 +16,13 @@ import {
   UNLIKE_COMMENT
 } from '../types';
 import axios from 'axios';
-const baseURL = '/';
+const serverURL = process.env.SERVER_URL;
 
 // Get all posts
 export const getPosts = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get(`${baseURL}posts`)
+    .get(`${serverURL}/posts`)
     .then((res) => {
       dispatch({
         type: SET_POSTS,
@@ -41,7 +41,7 @@ export const getPosts = () => (dispatch) => {
 export const getPost = (postId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .get(`${baseURL}posts/${postId}`)
+    .get(`${serverURL}/posts/${postId}`)
     .then((res) => {
       dispatch({
         type: SET_POST,
@@ -57,7 +57,7 @@ export const addPost = (newPost) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'post',
-    url: `${baseURL}posts/add/`,
+    url: `${serverURL}/posts/add/`,
     data: newPost,
     headers: { token: token.replace(/['"]+/g, '') }
   })
@@ -80,7 +80,7 @@ export const likePost = (postId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'get',
-    url: `${baseURL}likes/add/${postId}`,
+    url: `${serverURL}/likes/add/${postId}`,
     headers: { token: token.replace(/['"]+/g, '') }
   })
     .then((res) => {
@@ -96,7 +96,7 @@ export const unlikePost = (postId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'delete',
-    url: `${baseURL}likes/${postId}`,
+    url: `${serverURL}/likes/${postId}`,
     headers: { token: token.replace(/['"]+/g, '') }
   })
     .then((res) => {
@@ -115,7 +115,7 @@ export const addComment = (postId, commentData) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'post',
-    url: `${baseURL}comments/add/${postId}`,
+    url: `${serverURL}/comments/add/${postId}`,
     data: commentData,
     headers: { token: token.replace(/['"]+/g, '') }
   })
@@ -138,7 +138,7 @@ export const deleteComment = (commentId, postId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'delete',
-    url: `${baseURL}comments/${commentId}`,
+    url: `${serverURL}/comments/${commentId}`,
     headers: { token: token.replace(/['"]+/g, '') }
   })
     .then(() => {
@@ -157,7 +157,7 @@ export const likeComment = (commentId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'get',
-    url: `${baseURL}likes/comments/add/${commentId}`,
+    url: `${serverURL}/likes/comments/add/${commentId}`,
     headers: { token: token.replace(/['"]+/g, '') }
   })
     .then((res) => {
@@ -173,7 +173,7 @@ export const unlikeComment = (commentId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'delete',
-    url: `${baseURL}likes/comments/${commentId}`,
+    url: `${serverURL}/likes/comments/${commentId}`,
     headers: { token: token.replace(/['"]+/g, '') }
   })
     .then((res) => {
@@ -189,7 +189,7 @@ export const deletePost = (postId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   axios({
     method: 'delete',
-    url: `${baseURL}posts/${postId}`,
+    url: `${serverURL}/posts/${postId}`,
     headers: { token: token.replace(/['"]+/g, '') }
   })
     .then(() => {
@@ -201,7 +201,7 @@ export const deletePost = (postId) => (dispatch) => {
 export const getUserData = (userId) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get(`${baseURL}users/${userId.replace(/['"]+/g, '')}`)
+    .get(`${serverURL}/users/${userId.replace(/['"]+/g, '')}`)
     .then((res) => {
       dispatch({
         type: SET_POSTS,

@@ -22,13 +22,13 @@ class User extends Component {
   componentDidMount() {
     const userId = this.props.match.params.userId;
     const postId = this.props.match.params.postId;
-    const baseURL = '/';
+    const serverURL = process.env.SERVER_URL;
 
     if (postId) this.setState({ postIdParam: postId });
 
     this.props.getUserData(userId);
     axios
-      .get(`${baseURL}users/${userId.replace(/['"]+/g, '')}`)
+      .get(`${serverURL}/users/${userId.replace(/['"]+/g, '')}`)
       .then((res) => {
         this.setState({
           profile: res.data
