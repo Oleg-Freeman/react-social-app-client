@@ -80,13 +80,21 @@ class Register extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const newUserData = {
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2,
-      userName: this.state.userName
-    };
-    this.props.registerUser(newUserData, this.props.history);
+    if (this.state.password !== this.state.password2) {
+        this.setState({
+            errors: {
+              message: 'Passwords must match'
+            }
+        });
+    } else {
+      const newUserData = {
+        email: this.state.email,
+        password: this.state.password,
+        password2: this.state.password2,
+        userName: this.state.userName
+      };
+      this.props.registerUser(newUserData, this.props.history);
+    }
   };
 
   handleChange(event) {
