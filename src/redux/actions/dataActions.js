@@ -16,7 +16,7 @@ import {
   UNLIKE_COMMENT
 } from '../types';
 import axios from 'axios';
-const serverURL = process.env.SERVER_URL;
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 // Get all posts
 export const getPosts = () => (dispatch) => {

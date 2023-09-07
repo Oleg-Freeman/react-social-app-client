@@ -8,7 +8,7 @@ import {
   GET_USER_NOTIFICATIONS
 } from '../types';
 import axios from 'axios';
-const serverURL = process.env.SERVER_URL;
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });

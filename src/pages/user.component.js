@@ -22,7 +22,7 @@ class User extends Component {
   componentDidMount() {
     const userId = this.props.match.params.userId;
     const postId = this.props.match.params.postId;
-    const serverURL = process.env.SERVER_URL;
+    const serverURL = process.env.REACT_APP_SERVER_URL;
 
     if (postId) this.setState({ postIdParam: postId });
 
